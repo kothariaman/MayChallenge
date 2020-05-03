@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        int n = ransomNote.length();
+        map<char,int> mp;
+        for(int i=0;i<n;i++)
+            mp[ransomNote[i]]++;
+        int m = magazine.length();
+        map<char,int> hsmap;
+        for(int j=0;j<m;j++)
+            hsmap[magazine[j]]++;
+        
+        for(auto it = mp.begin();it!=mp.end();it++)
+        {
+            if(hsmap[it->first] < it->second )
+                return false;
+        }
+        return true;
+    }
+};
