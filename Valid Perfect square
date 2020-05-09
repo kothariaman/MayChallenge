@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isPerfectSquare(int num) {
+        if(num==0 || num==1)
+            return true;
+        long start = 1, end=num,ans;
+        while(start<=end){
+            long mid = (start+end)/2;
+            
+            if(mid*mid==num)
+                return true;
+            if(mid*mid<num){
+                ans = mid;
+                start = mid+1;
+            }
+            else
+            {
+                end = mid-1;
+            }
+        }
+        return (ans*ans==num);
+        }
+};
