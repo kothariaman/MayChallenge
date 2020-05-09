@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+ TreeNode* xParent = 0;
+    TreeNode* yParent = 0;
+    int xLevel = -1;
+    int yLevel = -1;
+public:
+    bool isCousins(TreeNode* root, int x, int y) {
+        search(root, 0, 0, x, y);
+        return xLevel == yLevel && xParent != yParent;
+    }
+    
+    void search(TreeNode* node, TreeNode* parent, int level, int x, int y) {
+        if (!node)
+            return;
+        if (node->val == x) {
+            xParent = parent;
+            xLevel = level;
+            return;
+        }
+        if (node->val == y) {
+            yParent = parent;
+            yLevel = level;
+            return;
+        }
+        search(node->left, node, level + 1, x, y);
+        search(node->right, node, level + 1, x, y);
+    }
+};
