@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+         unordered_map<int,int> mp,freq;
+        for(auto x:trust)
+        { 
+            mp[x[0]]++;
+         freq[x[1]]++; 
+        }
+        for(int i=1 ; i<=N ; i++)
+            if(mp[i]==0 and freq[i]==N-1) 
+                return i;   //if the number doesnt exist at 0th index in trust and its frequency at 1st index in trust must be N-1.
+        return -1;
+    }
+};
