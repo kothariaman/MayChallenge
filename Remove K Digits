@@ -1,0 +1,42 @@
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        int n = num.size();
+        if(n<=k)
+            return "0";
+        if(k==0)
+            return num;
+        stack<char> s;
+        //Stack here ensures that stack top element is not greater than the incoming element so, res is minimum.
+        for(char c:num){
+            while(k && !s.empty() && int(s.top())> int(c))
+            {
+                s.pop();
+                k--; //to remove K DIGITS.
+            }
+            s.push(c);
+        }
+            if(k) //stil K remaining as all elements are equal remaining
+            {
+                while(k--) 
+                    s.pop();
+            }
+            stack<char>  t;
+            while(!s.empty())
+            {
+                t.push(s.top());
+                s.pop();
+            }
+            //To remove leading zeroes and to ensure single "0" we iterate only till size is greater than 1
+            while(t.top()=='0' && t.size()!=1)
+                t.pop();
+            num = "";
+            while(!t.empty()){
+                num.push_back(t.top());
+                t.pop();
+        }
+            return num;
+    }
+};
+
+    
