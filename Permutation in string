@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        unordered_map<int,int> mp;
+        for(int i=0;i<s1.length();i++)
+            mp[s1[i]-'a']++;
+            
+        if(s2.length()==0)
+            return false;
+        int start = 0;
+        int end = 0;
+            while(end<s2.length())
+            {
+                if(mp[s2[end]-'a']>0){
+                    mp[s2[end++]-'a']--;
+                    if(end-start == s1.length())
+                        return true;
+                }
+                else if(start==end)
+                {
+                    start++;
+                    end++;
+                }
+                else
+                    mp[s2[start++]-'a']++;
+            }
+            return false;
+    }
+};
