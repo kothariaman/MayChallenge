@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+          stack<TreeNode *> s; 
+    TreeNode *curr = root; 
+        vector<int> A;
+    while (curr != NULL || s.empty() == false) 
+    { 
+        while (curr !=  NULL) 
+        {
+            s.push(curr); 
+            curr = curr->left; 
+        }
+        curr = s.top(); 
+        s.pop();   
+        A.push_back(curr->val); 
+        curr = curr->right; 
+    } 
+        return A[k-1];
+    }
+};
