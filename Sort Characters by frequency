@@ -1,0 +1,23 @@
+class Solution {
+public:
+    static bool compare(pair<char,int> i1, pair<char,int> i2)
+    {
+        return (i1.second> i2.second);
+    }
+    string frequencySort(string s) {
+       map<char,int> hsmap;
+        for(int i=0;i<s.length();i++)
+            hsmap[s[i]]++;
+        vector<pair<char,int> > v;
+        for(auto i:hsmap)
+            v.push_back({i.first,i.second});
+        sort(v.begin(),v.end(),compare);
+        string ans="";
+        for(auto j:v)
+        {
+            while(j.second--)
+            ans+= j.first;
+        }
+        return ans;
+    }
+};
