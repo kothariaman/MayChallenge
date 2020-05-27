@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        stack<TreeNode*> s;
+        TreeNode* root = new TreeNode(preorder[0]);
+        s.push(root);
+        TreeNode* temp;
+       for ( int i = 1; i < preorder.size(); ++i )  
+    {  
+        temp = NULL;  
+  
+        /* Keep on popping while the next value is greater than  
+        stack's top value. */
+        while ( !s.empty() && preorder[i] > s.top()->val) 
+        {
+            temp = s.top();
+            s.pop();
+        }
+        // Make this greater value as the right child 
+                // and push it to the stack 
+        if ( temp != NULL)  
+        {  
+            temp->right = new TreeNode( preorder[i] );  
+            s.push(temp->right);
+        }   
+        else
+        {  
+            s.top()->left = new TreeNode( preorder[i] );  
+            s.push(s.top()->left);
+        }  
+    }  
+  
+    return root;  
+    }
+};
