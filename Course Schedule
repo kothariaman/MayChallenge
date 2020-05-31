@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool dfs(int v, vector<int> adj[], vector<int>& vis)
+    {
+     if(vis[v]==1)
+         return true;
+     if(vis[v]==0){
+         vis[v] = 1;
+         for(auto edge:adj[v])
+             if(dfs(edge,adj,vis))
+                 return true;
+     }
+     vis[v] = 2;
+     return false;
+    }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> adj[numCourses];
+        for(auto edge: prerequisites)
+            adj[edge[1]].push_back(edge[0]);
+        vector<int> vis(numCourses,0);
+        for(int i=0;i<numCourses;i++)
+        {
+            if(dfs(i,adj,vis))
+                return false;
+        }
+        return true;
+    }
+};
